@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+
+# NDK / native build
+.externalNativeBuild/
+.cxx/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models are NOT bundled (too large) — never commit ggml weights
+*.bin
+*.ggml
+
+# Wiki pages live in the separate GitHub Wiki repo (whisper.wiki.git).
+# The wiki/ folder here is only the source used to sync them.
+/wiki/
