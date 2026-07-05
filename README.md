@@ -25,7 +25,7 @@ Pick **one** of the two methods.
 ```kotlin
 // build.gradle.kts (module)
 dependencies {
-    implementation("dev.ffmpegkit-maintained:whisper-android:0.1.1")
+    implementation("dev.ffmpegkit-maintained:whisper-android:0.1.2")
 }
 ```
 
@@ -44,14 +44,14 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts (module)
 dependencies {
-    implementation("com.github.ffmpegkit-maintained:whisper:v0.1.1")
+    implementation("com.github.ffmpegkit-maintained.whisper:whisper-android:v0.1.2")
 }
 ```
 
 ### C) Direct AAR download
 
 Grab `whisper-android-<version>.aar` from the [Releases](https://github.com/ffmpegkit-maintained/whisper/releases)
-page, drop it in `app/libs/`, and add `implementation(files("libs/whisper-android-0.1.1.aar"))`.
+page, drop it in `app/libs/`, and add `implementation(files("libs/whisper-android-0.1.2.aar"))`.
 
 ---
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         lifecycleScope.launch {
-            // Model file (16 kHz mono 16-bit WAV audio is required).
+            // Audio can be WAV/MP3/FLAC at any sample rate (decoded + resampled internally).
             val modelPath = File(getExternalFilesDir("models"), "ggml-base.en.bin").absolutePath
             val audioPath = File(getExternalFilesDir(null), "speech.wav").absolutePath
 
