@@ -5,6 +5,9 @@ on:
     tags: [ "v*" ]
   workflow_dispatch:
 
+permissions:
+  contents: write   # create the GitHub Release and attach the AAR
+
 jobs:
   build:
     runs-on: ubuntu-latest

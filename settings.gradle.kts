@@ -19,3 +19,4 @@ dependencyResolutionManagement {
 rootProject.name = "whisper"
 include(":library")
 include(":sample")
+include(":alias-whisper-cpp")
