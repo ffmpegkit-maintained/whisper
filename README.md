@@ -25,7 +25,7 @@ Pick **one** of the two methods.
 ```kotlin
 // build.gradle.kts (module)
 dependencies {
-    implementation("dev.ffmpegkit-maintained:whisper-android:0.1.2")
+    implementation("dev.ffmpegkit-maintained:whisper-android:1.0.0")
 }
 ```
 
@@ -44,14 +44,14 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts (module)
 dependencies {
-    implementation("com.github.ffmpegkit-maintained.whisper:whisper-android:v0.1.2")
+    implementation("com.github.ffmpegkit-maintained.whisper:whisper-android:v1.0.0")
 }
 ```
 
 ### C) Direct AAR download
 
 Grab `whisper-android-<version>.aar` from the [Releases](https://github.com/ffmpegkit-maintained/whisper/releases)
-page, drop it in `app/libs/`, and add `implementation(files("libs/whisper-android-0.1.2.aar"))`.
+page, drop it in `app/libs/`, and add `implementation(files("libs/whisper-android-1.0.0.aar"))`.
 
 ---
 

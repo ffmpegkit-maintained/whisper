@@ -40,5 +40,14 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.OSSRH_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSPHRASE }}
-        # Publishes both whisper-android (library) and the whisper-cpp-android alias.
-        run: ./gradlew publishToMavenCentral --no-configuration-cache --stacktrace
+        # Publish each module in its OWN Gradle invocation so each becomes a
+        # separately-named Central Portal deployment:
+        #   dev.ffmpegkit-maintained-whisper-android-<version>
+        #   dev.ffmpegkit-maintained-whisper-cpp-android-<version>
+        # A single root `publishToMavenCentral` aggregates both modules into one
+        # bundle, which the Portal then labels `dev.ffmpegkit-maintained-<version>`
+        # (no artifactId) — that was the cause of the mislabeled 0.1.2 deployment.
+        run: |
+          set -e
+          ./gradlew :library:publishToMavenCentral --no-configuration-cache --stacktrace
+          ./gradlew :alias-whisper-cpp:publishToMavenCentral --no-configuration-cache --stacktrace
