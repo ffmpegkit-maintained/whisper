@@ -1,0 +1,13 @@
+# JitPack build config. This project is a native (NDK) library, so JitPack must
+# use JDK 17 (required by AGP 8.7.3) and install the NDK + CMake before building.
+jdk:
+  - openjdk17
+
+before_install:
+  - yes | sdkmanager --licenses > /dev/null 2>&1 || true
+  - sdkmanager "ndk;27.2.12479018" "cmake;3.22.1"
+
+install:
+  # Root task delegates to :library:publishToMavenLocal (see build.gradle.kts),
+  # so the artifact resolves as com.github.ffmpegkit-maintained:whisper:<tag>.
+  - ./gradlew publishToMavenLocal --no-daemon --stacktrace
