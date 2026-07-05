@@ -15,7 +15,7 @@ mavenPublishing {
     if (providers.gradleProperty("signingInMemoryKey").isPresent) {
         signAllPublications()
     }
-    publishToMavenCentral()
+    publishToMavenCentral(automaticRelease = true)
 
     pom {
         name = "whisper.cpp for Android"

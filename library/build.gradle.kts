@@ -72,8 +72,10 @@ mavenPublishing {
     if (providers.gradleProperty("signingInMemoryKey").isPresent) {
         signAllPublications()
     }
-    // vanniktech 0.34.0: no argument = CENTRAL_PORTAL. Do NOT pass SonatypeHost.CENTRAL_PORTAL.
-    publishToMavenCentral()
+    // vanniktech 0.34.0: host defaults to CENTRAL_PORTAL. Do NOT pass
+    // SonatypeHost.CENTRAL_PORTAL. automaticRelease = true → publishes to Maven
+    // Central without the manual "Publish" click on the portal.
+    publishToMavenCentral(automaticRelease = true)
 
     pom {
         name = "whisper-android"
