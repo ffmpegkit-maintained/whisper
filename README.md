@@ -3,7 +3,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/dev.ffmpegkit-maintained/whisper-android)](https://central.sonatype.com/artifact/dev.ffmpegkit-maintained/whisper-android)
 [![JitPack](https://jitpack.io/v/ffmpegkit-maintained/whisper.svg)](https://jitpack.io/#ffmpegkit-maintained/whisper)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Website](https://img.shields.io/badge/website-jokobee.com-blue.svg)](https://www.jokobee.com)
+[![Website](https://img.shields.io/badge/website-jokobee.com-blue.svg)](https://www.jokobee.com/whisper)
 
 **Run [whisper.cpp](https://github.com/ggml-org/whisper.cpp) on Android with one Gradle line. No NDK, no source build.**
 
