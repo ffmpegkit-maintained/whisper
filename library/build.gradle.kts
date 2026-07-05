@@ -67,7 +67,11 @@ mavenPublishing {
     // artifactId = whisper-android (Free tier). Pro uses whisper-android-pro.
     coordinates("dev.ffmpegkit-maintained", "whisper-android", providers.gradleProperty("VERSION").get())
 
-    signAllPublications()
+    // Sign only when a GPG key is configured (Maven Central publish). JitPack and
+    // local publishToMavenLocal have no key → skip signing so the build succeeds.
+    if (providers.gradleProperty("signingInMemoryKey").isPresent) {
+        signAllPublications()
+    }
     // vanniktech 0.34.0: no argument = CENTRAL_PORTAL. Do NOT pass SonatypeHost.CENTRAL_PORTAL.
     publishToMavenCentral()
 

@@ -11,7 +11,10 @@ val whisperVersion = providers.gradleProperty("VERSION").get()
 mavenPublishing {
     coordinates("dev.ffmpegkit-maintained", "whisper-cpp-android", whisperVersion)
 
-    signAllPublications()
+    // Sign only when a GPG key is configured (see library/build.gradle.kts).
+    if (providers.gradleProperty("signingInMemoryKey").isPresent) {
+        signAllPublications()
+    }
     publishToMavenCentral()
 
     pom {
