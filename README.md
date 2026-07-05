@@ -114,10 +114,10 @@ Download the one that fits your speed/quality/size budget from Hugging Face:
 
 | Model | Size | Speed | Quality | Languages | Download |
 |---|---|---|---|---|---|
-| `tiny.en` | ~75 MB | ⚡⚡⚡ fastest | ★★ | English only | [ggml-tiny.en.bin](https://huggingface.co/ggml-org/whisper.cpp/resolve/main/ggml-tiny.en.bin) |
-| `base` | ~142 MB | ⚡⚡ fast | ★★★ | 99 languages | [ggml-base.bin](https://huggingface.co/ggml-org/whisper.cpp/resolve/main/ggml-base.bin) |
-| `base.en` | ~142 MB | ⚡⚡ fast | ★★★ | English only | [ggml-base.en.bin](https://huggingface.co/ggml-org/whisper.cpp/resolve/main/ggml-base.en.bin) |
-| `small` | ~466 MB | ⚡ slower | ★★★★ | 99 languages | [ggml-small.bin](https://huggingface.co/ggml-org/whisper.cpp/resolve/main/ggml-small.bin) |
+| `tiny.en` | ~75 MB | ⚡⚡⚡ fastest | ★★ | English only | [ggml-tiny.en.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.en.bin) |
+| `base` | ~142 MB | ⚡⚡ fast | ★★★ | 99 languages | [ggml-base.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin) |
+| `base.en` | ~142 MB | ⚡⚡ fast | ★★★ | English only | [ggml-base.en.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin) |
+| `small` | ~466 MB | ⚡ slower | ★★★★ | 99 languages | [ggml-small.bin](https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin) |
 
 **Which one?** Start with **`base`** (or `base.en` for English-only) — the best
 speed/quality trade-off on a phone. Use `tiny.en` if you need real-time-ish speed
