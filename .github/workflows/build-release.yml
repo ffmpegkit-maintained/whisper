@@ -42,7 +42,7 @@ jobs:
         with:
           name: whisper-android-aar
           path: dist/*.aar
-          retention-days: 30
+          retention-days: 5
 
       # On a tag push, attach the AAR to the GitHub Release (free download tier).
       - name: Attach AAR to GitHub Release
