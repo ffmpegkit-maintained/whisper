@@ -22,9 +22,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            // Sign the sample's release with the auto-generated debug key so the
-            // performance-test APK is installable. (Sample only — not the AAR.)
-            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
