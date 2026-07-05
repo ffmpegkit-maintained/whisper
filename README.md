@@ -101,8 +101,9 @@ class MainActivity : AppCompatActivity() {
 
 That's it. `Whisper.transcribe` is a `suspend` function — call it from a coroutine.
 
-> **Audio format:** whisper.cpp needs **16 kHz, mono, 16-bit PCM WAV**. Resample
-> your audio to that before calling `transcribe` (FFmpeg, `AudioRecord` at 16 kHz, etc.).
+> **Audio input:** **WAV, MP3 or FLAC** at any sample rate — the library decodes
+> and resamples to 16 kHz mono automatically (via whisper.cpp's built-in miniaudio
+> decoder, **no FFmpeg**). No manual conversion needed.
 
 ---
 

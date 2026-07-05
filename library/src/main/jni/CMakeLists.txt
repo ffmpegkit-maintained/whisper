@@ -39,7 +39,8 @@ find_library(log-lib log)
 
 target_include_directories(whisper_jni PRIVATE
     ${WHISPER_DIR}/include
-    ${WHISPER_DIR}/ggml/include)
+    ${WHISPER_DIR}/ggml/include
+    ${WHISPER_DIR}/examples)   # miniaudio.h (integrated audio decoder)
 
 target_link_libraries(whisper_jni
     whisper

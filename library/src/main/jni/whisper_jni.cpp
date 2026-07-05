@@ -18,40 +18,45 @@
 
 #include "whisper.h"
 
+// whisper.cpp's integrated audio decoder (v1.7.5 ships miniaudio, which embeds
+// ma_dr_wav). No FFmpeg. Decode-only build (MA_NO_DEVICE_IO): decodes WAV/MP3/
+// FLAC and resamples to 16 kHz mono f32 — exactly what whisper_full expects.
+#define MINIAUDIO_IMPLEMENTATION
+#define MA_NO_DEVICE_IO
+#define MA_NO_ENGINE
+#define MA_NO_RESOURCE_MANAGER
+#define MA_NO_NODE_GRAPH
+#define MA_NO_GENERATION
+#include "miniaudio.h"
+
 #define LOG_TAG "whisper-jni"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 namespace {
 
-// Minimal 16-bit PCM WAV reader → mono float32 @ 16 kHz expected.
-// whisper.cpp requires 16 kHz mono f32; callers should resample beforehand.
-bool read_wav_pcm16(const char *path, std::vector<float> &pcmf32) {
-    FILE *f = fopen(path, "rb");
-    if (!f) return false;
-
-    uint8_t header[44];
-    if (fread(header, 1, 44, f) != 44) { fclose(f); return false; }
-
-    // Bits 22-23: num channels; 34-35: bits per sample.
-    const uint16_t channels = header[22] | (header[23] << 8);
-    const uint16_t bits     = header[34] | (header[35] << 8);
-    if (bits != 16) { fclose(f); return false; }
-
-    std::vector<int16_t> raw;
-    int16_t sample;
-    while (fread(&sample, sizeof(int16_t), 1, f) == 1) raw.push_back(sample);
-    fclose(f);
-
-    const size_t frames = channels > 0 ? raw.size() / channels : 0;
-    pcmf32.resize(frames);
-    for (size_t i = 0; i < frames; ++i) {
-        // Downmix to mono if needed.
-        int32_t acc = 0;
-        for (uint16_t c = 0; c < channels; ++c) acc += raw[i * channels + c];
-        pcmf32[i] = static_cast<float>(acc) / (channels * 32768.0f);
+// Decode any WAV/MP3/FLAC file to mono f32 @ 16 kHz via miniaudio (whisper.cpp's
+// integrated decoder). Handles arbitrary channel counts / sample rates by
+// downmixing + resampling. No FFmpeg dependency.
+bool decode_pcmf32(const char *path, std::vector<float> &pcmf32) {
+    ma_decoder_config cfg = ma_decoder_config_init(ma_format_f32, 1, WHISPER_SAMPLE_RATE);
+    ma_decoder decoder;
+    if (ma_decoder_init_file(path, &cfg, &decoder) != MA_SUCCESS) {
+        LOGE("could not open audio: %s", path);
+        return false;
     }
-    return true;
+
+    pcmf32.clear();
+    constexpr ma_uint64 CHUNK = 4096; // frames == floats (mono)
+    std::vector<float> buf(CHUNK);
+    ma_uint64 read = 0;
+    while (ma_decoder_read_pcm_frames(&decoder, buf.data(), CHUNK, &read) == MA_SUCCESS && read > 0) {
+        pcmf32.insert(pcmf32.end(), buf.begin(), buf.begin() + static_cast<size_t>(read));
+        if (read < CHUNK) break;
+    }
+
+    ma_decoder_uninit(&decoder);
+    return !pcmf32.empty();
 }
 
 std::string jstr(JNIEnv *env, jstring s) {
@@ -105,8 +110,8 @@ Java_dev_ffmpegkit_whisper_WhisperJNI_nativeTranscribe(
     if (!ctx) return env->NewStringUTF("{\"error\":\"invalid model handle\"}");
 
     std::vector<float> pcmf32;
-    if (!read_wav_pcm16(jstr(env, jaudio).c_str(), pcmf32)) {
-        return env->NewStringUTF("{\"error\":\"could not read audio (expected 16-bit PCM WAV, 16 kHz mono)\"}");
+    if (!decode_pcmf32(jstr(env, jaudio).c_str(), pcmf32)) {
+        return env->NewStringUTF("{\"error\":\"could not decode audio (supported: WAV/MP3/FLAC)\"}");
     }
 
     const std::string lang = jstr(env, jlang);
