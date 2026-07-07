@@ -170,3 +170,10 @@ Maintained under the [`ffmpegkit-maintained`](https://github.com/ffmpegkit-maint
 ## License
 
 MIT — see [LICENSE](LICENSE). whisper.cpp is also MIT (© Georgi Gerganov and contributors).
+
+## Third-Party Notices
+
+Third-party components bundled or built into this project retain their original
+licenses. See [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt), which is also copied
+into the AAR assets at build time (readable at runtime via
+`context.assets.open("THIRD-PARTY-NOTICES.txt")`).

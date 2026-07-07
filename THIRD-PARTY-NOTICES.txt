@@ -1,0 +1,53 @@
+================================================================================
+THIRD-PARTY NOTICES — Whisper Android (Free)
+================================================================================
+Include this file in your application's "Open Source Licenses" or "About"
+screen, or bundle it as an asset accessible to the user.
+
+--------------------------------------------------------------------------------
+WHISPER.CPP
+--------------------------------------------------------------------------------
+Copyright (c) 2023-2026 Georgi Gerganov and the ggml authors.
+Licensed under the MIT License.
+Repository: https://github.com/ggerganov/whisper.cpp
+
+--------------------------------------------------------------------------------
+GGML
+--------------------------------------------------------------------------------
+Copyright (c) 2023-2026 Georgi Gerganov and the ggml authors.
+Licensed under the MIT License.
+
+--------------------------------------------------------------------------------
+MINIAUDIO
+--------------------------------------------------------------------------------
+Copyright (c) David Reid.
+Licensed under the MIT License (or public domain, at your choice).
+Repository: https://github.com/mackron/miniaudio
+
+--------------------------------------------------------------------------------
+WHISPER MODELS (downloaded separately)
+--------------------------------------------------------------------------------
+Whisper models are derived from OpenAI's Whisper.
+Copyright (c) OpenAI. Licensed under the MIT License.
+Model files: https://huggingface.co/ggerganov/whisper.cpp
+
+--------------------------------------------------------------------------------
+MIT LICENSE
+--------------------------------------------------------------------------------
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+--------------------------------------------------------------------------------
+Build scripts and packaging: copyright (c) 2026 Jokobee (www.jokobee.com)
+================================================================================
