@@ -138,8 +138,15 @@ Ship the model with your app (assets or a first-run download), then load it with
 | NEON | ✅ enabled |
 | compileSdk / targetSdk | 35 |
 
-Need `x86_64` (emulators, Chromebooks), real-time streaming, VAD, or quantized
-models? Those are in the **Pro** build — see [jokobee.com](https://www.jokobee.com).
+The Free tier above covers file-based transcription on `arm64-v8a`. The **Pro**
+build adds:
+
+- **Multi-ABI** — `x86_64` support (emulators, Chromebooks) in addition to `arm64-v8a`
+- **Real-time streaming** — mic → text as you speak (`WhisperStreaming`)
+- **VAD** — voice activity detection for silence-aware streaming and offline use (`WhisperVAD`)
+- **Quantized models** — `q4_0` / `q5_1` / `q8_0` for smaller, faster models
+
+Get the Pro build at **[jokobee.com](https://www.jokobee.com/whisper)**.
 
 ---
 
