@@ -34,8 +34,8 @@ mavenPublishing {
 
         developers {
             developer {
-                id = "lucquebec"
-                name = "Luc Côté"
+                id = "jokobee"
+                name = "Jokobee"
                 url = "https://www.jokobee.com"
                 email = "contact@jokobee.com"
                 organization = "Jokobee"
