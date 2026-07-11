@@ -35,3 +35,20 @@ jobs:
           name: sample-debug-apk
           path: sample/build/outputs/apk/debug/*.apk
           retention-days: 5
+
+      - name: Docs version consistency check
+        # Source of truth = what's ACTUALLY live on Maven Central (not gradle.properties'
+        # VERSION, which can be bumped locally without ever being published).
+        run: |
+          V=$(curl -sf "https://repo1.maven.org/maven2/dev/ffmpegkit-maintained/whisper-android/maven-metadata.xml" \
+            | grep -oP '<release>\K[^<]+')
+          if [ -z "$V" ]; then
+            echo "::error::could not fetch the current release version from Maven Central metadata"
+            exit 1
+          fi
+          echo "Live on Maven Central: $V"
+          if ! grep -q "dev.ffmpegkit-maintained:whisper-android:$V" README.md; then
+            echo "::error file=README.md::does not mention the Maven Central version ($V) — likely stale."
+            exit 1
+          fi
+          echo "README.md is in sync with $V."
