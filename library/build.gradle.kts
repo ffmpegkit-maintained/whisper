@@ -79,7 +79,7 @@ mavenPublishing {
 
     pom {
         name = "whisper-android"
-        description = "Prebuilt whisper.cpp AAR for Android — on-device speech-to-text, no NDK required. Drop-in, arm64-v8a, API 24+."
+        description = "Whisper for Android — prebuilt whisper.cpp AAR, on-device speech-to-text and audio transcription, no NDK required, no cloud, no API key. Drop-in AAR, arm64-v8a, API 24+. jokobee.com"
         inceptionYear = "2026"
         url = "https://github.com/ffmpegkit-maintained/whisper"
 
